@@ -46,6 +46,9 @@ class Camera {
             maxWidth: 800,
             minAspectRatio: 1.6
           },
+          deviceId: {
+            exact: this.id,
+          },
           optional: []
         }
       };
