@@ -21,6 +21,7 @@ class Camera {
   async start() {
     let constraints;
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    var firefox = /firefox/i.test(navigator.userAgent);
 
     if (iOS) {
       constraints = {
@@ -36,7 +37,7 @@ class Camera {
           optional: []
         }
       };
-    } else {
+    } else if(firefox) {
       constraints = {
         audio: false,
         video: {
@@ -48,6 +49,19 @@ class Camera {
           },
           deviceId: {
             exact: this.id,
+          },
+          optional: []
+        }
+      };
+    } else {
+      constraints = {
+        audio: false,
+        video: {
+          mandatory: {
+            sourceId: this.id,
+            minWidth: 600,
+            maxWidth: 800,
+            minAspectRatio: 1.6
           },
           optional: []
         }
